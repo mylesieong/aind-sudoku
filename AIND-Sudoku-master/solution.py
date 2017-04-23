@@ -38,10 +38,23 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
-    print("Myles debug")
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
-
+    display(values)
+    for unit in unitlist:
+        # Find all instances of naked twins
+        value_dict_of_unit = dict()
+        for box in unit:
+            if values[box] in value_dict_of_unit.keys():
+                value_dict_of_unit[values[box]] = value_dict_of_unit[values[box]] + 1
+            else:
+                value_dict_of_unit[values[box]] = 1
+        naked_values = [ x for x in value_dict_of_unit.keys() if len(x) == 2 and value_dict_of_unit[x] == 2 ]
+        # Eliminate the naked twins as possibilities for their peers
+        for box in unit:
+            if values[box] not in naked_values:
+                for naked_value in naked_values:
+                    for digit in naked_value:
+                        values[box].replace(digit, '')
+    display(values)
 
 def grid_values(grid):
     """
@@ -69,7 +82,13 @@ def display(values):
     Args:
         values(dict): The sudoku in dictionary form
     """
-    pass
+    width = 1+max(len(values[s]) for s in boxes)
+    line = '+'.join(['-'*(width*3)]*3)
+    for r in rows:
+        print(''.join(values[r+c].center(width)+('|' if c in '36' else '')
+                      for c in cols))
+        if r in 'CF': print(line)
+    return
 
 def eliminate(values):
     solved_values = [box for box in values.keys() if len(values[box]) == 1]
