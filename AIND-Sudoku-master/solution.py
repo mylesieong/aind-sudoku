@@ -53,6 +53,7 @@ def naked_twins(values):
                 for naked_value in naked_values:
                     for digit in naked_value:
                         values[box] = values[box].replace(digit, '')
+    return values
 
 def grid_values(grid):
     """
