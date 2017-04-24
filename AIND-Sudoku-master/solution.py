@@ -38,7 +38,6 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
-    display(values)
     for unit in unitlist:
         # Find all instances of naked twins
         value_dict_of_unit = dict()
@@ -53,8 +52,7 @@ def naked_twins(values):
             if values[box] not in naked_values:
                 for naked_value in naked_values:
                     for digit in naked_value:
-                        values[box].replace(digit, '')
-    display(values)
+                        values[box] = values[box].replace(digit, '')
 
 def grid_values(grid):
     """
