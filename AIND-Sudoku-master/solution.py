@@ -155,6 +155,14 @@ def solve(grid):
     Returns:
         The dictionary representation of the final sudoku grid. False if no solution exists.
     """
+    """ <test the failed case> """
+    testcase = '9.1....8.8.5.7..4.2.4....6...7......5..............83.3..6......9................'
+    values_test = grid_values(testcase)
+    display(values_test)
+    values_test = search(values_test)
+    display(values_test)
+    """ </test the failed case> """
+
     values = grid_values(grid)
     values = reduce_puzzle(values)
     return values
